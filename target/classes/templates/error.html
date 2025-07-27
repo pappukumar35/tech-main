@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/base :: head"></head>
+<body>
+    <div th:replace="layout/base :: nav"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4 text-center">
+                        <i class="fas fa-exclamation-circle fa-4x text-danger mb-3"></i>
+                        <h2 class="page-title mb-4">Oops! Something went wrong</h2>
+                        
+                        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+                        <div th:if="${message}" class="alert alert-info" th:text="${message}"></div>
+                        
+                        <p class="text-muted mb-4">We apologize for the inconvenience. Please try again later.</p>
+                        
+                        <div class="d-grid gap-2">
+                            <a href="/" class="btn btn-primary">
+                                <i class="fas fa-home me-1"></i> Go to Home
+                            </a>
+                            <a href="javascript:history.back()" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-1"></i> Go Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="layout/base :: footer"></div>
+    <div th:replace="layout/base :: scripts"></div>
+</body>
+</html> 

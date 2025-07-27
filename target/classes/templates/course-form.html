@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/base :: head"></head>
+<body>
+    <div th:replace="layout/base :: nav"></div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="page-title text-center mb-4" th:text="${course.id == null ? 'Create New Course' : 'Edit Course'}"></h2>
+                        
+                        <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+                        
+                        <form th:action="@{/courses}" th:object="${course}" method="post">
+                            <input type="hidden" th:field="*{id}" />
+                            
+                            <div class="mb-4">
+                                <label for="title" class="form-label">Course Title</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-book"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="title" th:field="*{title}" 
+                                           placeholder="Enter course title" required maxlength="100">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="description" class="form-label">Description</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-align-left"></i>
+                                    </span>
+                                    <textarea class="form-control" id="description" th:field="*{description}" 
+                                              placeholder="Enter course description" required maxlength="1000" rows="4"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label for="price" class="form-label">Price</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </span>
+                                        <input type="number" class="form-control" id="price" th:field="*{price}" 
+                                               placeholder="Enter course price" required step="0.01" min="0">
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <label for="duration" class="form-label">Duration</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-clock"></i>
+                                        </span>
+                                        <input type="text" class="form-control" id="duration" th:field="*{duration}" 
+                                               placeholder="e.g., 3 months, 6 weeks" required maxlength="50">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="instructor" class="form-label">Instructor Name</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user-tie"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="instructor" th:field="*{instructor}" 
+                                           placeholder="Enter instructor name" required maxlength="100">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="imageUrl" class="form-label">Course Image URL</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-image"></i>
+                                    </span>
+                                    <input type="url" class="form-control" id="imageUrl" th:field="*{imageUrl}" 
+                                           placeholder="Enter image URL (optional)" maxlength="255">
+                                </div>
+                                <small class="text-muted">Leave empty to use default course image</small>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-1"></i>
+                                    <span th:text="${course.id == null ? 'Create Course' : 'Update Course'}"></span>
+                                </button>
+                                <a href="/courses" class="btn btn-outline-secondary">
+                                    <i class="fas fa-times me-1"></i> Cancel
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="layout/base :: footer"></div>
+    <div th:replace="layout/base :: scripts"></div>
+</body>
+</html> 
